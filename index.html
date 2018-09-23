@@ -15,7 +15,7 @@
     <body>
         
         <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="#"><img class="img-fluid" width="150" height="50" src="images/logo.png"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent">
                 <span class="navbar-toggler-icon "></span>
@@ -153,7 +153,7 @@
                                         <div class="container-fluid mt-2">
                                             <div class="row news">
                                                 <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <img class="rounded" height="100%" width="100%" src="images/news/article-1.jpg">
+                                                    <a href="#"><img class="rounded" height="100%" width="100%" src="images/news/article-1.jpg"></a>
                                                 </div>
                                                 <div class="col-12 col-md-8 highlight">
                                                     <h3 style="font-family:Impact"><a href="#">Marvel TV Is Even Less Important To The MCU Now</a></h3>
@@ -162,7 +162,7 @@
                                             </div>
                                             <div class="row news">
                                                 <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <img class="rounded" height="100%" width="100%" src="images/news/article-2.jpg">
+                                                    <a href="#"><img class="rounded" height="100%" width="100%" src="images/news/article-2.jpg"></a>
                                                 </div>
                                                 <div class="col-12 col-md-8 highlight">
                                                     <h3 style="font-family:Impact"><a href="#">Jamie Foxx & Joseph Gordon-Levitt Starring in Netflix Sci-Fi Film</a></h3>
@@ -171,7 +171,7 @@
                                             </div>
                                             <div class="row news">
                                                 <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <img class="rounded" height="100%" width="100%" src="images/news/article-3.jpg">
+                                                    <a href="#"><img class="rounded" height="100%" width="100%" src="images/news/article-3.jpg"></a>
                                                 </div>
                                                 <div class="col-12 col-md-8 highlight">
                                                     <h3 style="font-family:Impact"><a href="#">Fantasy Book Series The Riftwar Saga Becoming TV Show</a></h3>
@@ -179,7 +179,7 @@
                                                 </div>
                                             </div>
                                             <div class="row news">
-                                                <div class="col-0 col-md-4 d-none d-md-block zoom">
+                                                <a href="#"><div class="col-0 col-md-4 d-none d-md-block zoom"></a>
                                                     <img class="rounded" height="100%" width="100%" src="images/news/article-4.jpg">
                                                 </div>
                                                 <div class="col-12 col-md-8 highlight">
@@ -262,22 +262,39 @@
 
         <footer> 
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-md-6 m-auto p-5">
-                        <img height="40%" width="60%" src="./images/logo.png">
+                <div class="text-center row">
+                    <div class="col-md-4">
+                        <img src="./images/logo.png" class="img-fluid mt-3">
+                        <hr>
+                        <p>Movies</p>
+                        <p>TV Shows</p>
+                        <p>Wishlist</p>
+                        <p>User Center</p>
                     </div>
-                    <div class="col-12 col-md-3 mt-5 p-2 text-white">
-                        <h3>Social</h3>
-                        <a href="#">Facebook</a><br>
-                        <a href=#>Twitter</a><br>
-                        <a href="#">Instagram</a><br>
-                        <a href=#>Google</a><br>
+                    <div class="col-md-4 social">
+                        <hr>
+                        <h2>Social</h2>
+                        <hr>
+                        <a href="#" class="fa fa-facebook"></a>
+                        <a href="#" class="fa fa-twitter"></a>
+                        <a href="#" class="fa fa-google"></a>
+                        <a href="#" class="fa fa-youtube"></a>
+                        <a href="#" class="fa fa-instagram"></a>
                     </div>
-                    <div class="col-12 col-md-3 mt-5 p-2 text-white">
-                        <h3>Contact Us</h3><br>
-                        <span class="fa fa-envelope "> :</span><a href="#">mail@mrcritic.com</a><br>
-                        <span class="fa fa-phone"></span> :<a href="#">+91 123456789</a>
-                    </div>
+                    <div class="col-md-4">
+                        <hr >
+                        <h2>Contact Us</h2>
+                        <hr>
+                        <p>Adress Line 1</p>
+                        <p>Adress Line 2</p>
+                        <p>Adress Line 3</p>
+                        <p>E-Mail: mrcritic@mail.com</p>
+                        <p>Phone: +91 123 456 789</p>
+                    </div> 
+                    <div class="col-12">
+                        <hr>
+                        <p>&copy;mrcritic.com</p>
+                    </div> 
                 </div>
             </div>
         </footer>
