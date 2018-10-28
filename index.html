@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
@@ -16,16 +16,16 @@
         
         <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="#"><img class="img-fluid" width="150" height="50" src="images/logo.png"></a>
+            <a class="navbar-brand" href="#"><img class="img-fluid" width="120" height="120" src="images/logo.png"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent">
                 <span class="navbar-toggler-icon "></span>
             </button>
             <div class="collapse navbar-collapse" id="navContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item active"><a class="nav-link py-0" href="#">Home</a></li>
                     <li class="nav-item">
                         <div class="dropdown">
-                            <a  class="nav-link dropdown-toggle dropbtn" href="#" role="button">
+                            <a  class="nav-link dropdown-toggle dropbtn py-0" href="#" role="button">
                                 Browse
                             </a>
                             <div class="dropdown-menu dropdown-content">
@@ -34,8 +34,8 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link " href="#">Wishlist</a></li>
-                    <li class="nav-item"><a class="nav-link " href="#">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link py-0" href="#">Wishlist</a></li>
+                    <li class="nav-item"><a class="nav-link py-0" href="#">Contact Us</a></li>
                 </ul>
             </div>
         </nav>
@@ -86,7 +86,8 @@
             </a>
         </div>
 
-        <div class="container-fluid mt-3 mb-5">
+        <div class="display-4 loading_theaters text-center"><img src="http://192.168.1.11:3000/images/load.gif"></div>
+        <div class="container-fluid mt-3 mb-5 in_theaters" style="display: none">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-10">
@@ -99,37 +100,8 @@
                 </div>
             </div>
             <div class="container-fluid mt-3">
-                <div class="row">
-                    <div class="col-6 col-md-2 p-2">
-                        <div class="zoom">
-                            <img class="img-thumbnail" src="images/inTheaters/nun.jpg" height="400px" width="100%">
-                        </div> 
-                    </div>
-                    <div class="col-6 col-md-2 p-2">
-                        <div class="zoom">
-                            <img class="img-thumbnail" src="images/inTheaters/predator.jpg" height="400px" width="100%">  
-                        </div>
-                    </div>
-                    <div  class="col-6  col-md-2 p-2">
-                        <div class="zoom">
-                            <img class="img-thumbnail" src="images/inTheaters/stree.jpg" height="400px" width="100%">  
-                        </div>
-                    </div>
-                    <div  class="col-6 col-md-2 p-2">
-                        <div class="zoom">
-                            <img class="img-thumbnail" src="images/inTheaters/batti.jpg" height="400px" width="100%">  
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-2 p-2">
-                        <div class="zoom">
-                            <img class="img-thumbnail" src="images/inTheaters/manmarziya.jpg" height="400px" width="100%">  
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-2 p-2">
-                        <div class="zoom">
-                            <img class="img-thumbnail" src="images/inTheaters/gg.jpg" height="400px" width="100%">  
-                        </div>
-                    </div>    
+                <div class="row imgs">
+                    
                 </div>
             </div>
         </div>
@@ -138,134 +110,14 @@
             <!---Fixed Background--->
         </div>
 
-        <div class="container-fluid mt-5 mb-5">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="display-3">What's Hot?</h1>
-                </div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h1 class="card-title text-center">Latest News</h1>
-                                    <div class="card-content">
-                                        <div class="container-fluid mt-2">
-                                            <div class="row news">
-                                                <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <a href="#"><img class="rounded" height="100%" width="100%" src="images/news/article-1.jpg"></a>
-                                                </div>
-                                                <div class="col-12 col-md-8 highlight">
-                                                    <h3 style="font-family:Impact"><a href="#">Marvel TV Is Even Less Important To The MCU Now</a></h3>
-                                                    <p style="font-size: 1.4em">Marvel Studios is planning to launch a whole new range of shows for Disney's streaming service - but it will cost current Marvel Television shows.</p>
-                                                </div>
-                                            </div>
-                                            <div class="row news">
-                                                <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <a href="#"><img class="rounded" height="100%" width="100%" src="images/news/article-2.jpg"></a>
-                                                </div>
-                                                <div class="col-12 col-md-8 highlight">
-                                                    <h3 style="font-family:Impact"><a href="#">Jamie Foxx & Joseph Gordon-Levitt Starring in Netflix Sci-Fi Film</a></h3>
-                                                    <p style="font-size: 1.4em">Jamie Foxx and Joseph Gordon-Levitt have both signed on to star in a forthcoming sci-fi movie for Netflix, with title and plot both still a secret.</p>
-                                                </div>
-                                            </div>
-                                            <div class="row news">
-                                                <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <a href="#"><img class="rounded" height="100%" width="100%" src="images/news/article-3.jpg"></a>
-                                                </div>
-                                                <div class="col-12 col-md-8 highlight">
-                                                    <h3 style="font-family:Impact"><a href="#">Fantasy Book Series The Riftwar Saga Becoming TV Show</a></h3>
-                                                    <p style="font-size: 1.4em">The Riftwar Saga - a classic fantasy series by writer Raymond E. Feist - will be adapted for television by Atomic Blonde writer Kurt Johnstad.</p>
-                                                </div>
-                                            </div>
-                                            <div class="row news">
-                                                <a href="#"><div class="col-0 col-md-4 d-none d-md-block zoom"></a>
-                                                    <img class="rounded" height="100%" width="100%" src="images/news/article-4.jpg">
-                                                </div>
-                                                <div class="col-12 col-md-8 highlight">
-                                                    <h3 style="font-family:Impact"><a href="#">Captain Marvel Trailer Gets 109 Million Views In First 24 Hours</a></h3>
-                                                    <p style="font-size: 1.4em">Marvel Studios reveals the Captain Marvel trailer earned 109 million views in its first 24 hours, thus becoming the 11th most watched trailer.</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col d-flex vmore">
-                                                    <div class="ml-auto mt-1">
-                                                        <a href="#">View More</a>
-                                                        <i class="fa fa-chevron-right"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 mt-2 mt-md-0">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h1 class="card-title text-center">Celebrity News</h1>
-                                    <div class="card-content">
-                                        <div class="container-fluid mt-2">
-                                            <div class="row news">
-                                                <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <img class="rounded" height="100%" width="100%" src="images/news/cel-1.jpg">
-                                                </div>
-                                                <div class="col-12 col-md-8 highlight">
-                                                    <h3 style="font-family:Impact"><a href="#">Avengers 4 Reshoots: Chris Evans Reveals Return to Classic Captain America Look</a></h3>
-                                                    <p style="font-size: 1.4em">Chris Evans has taken to social media to confirm that Captain America is returning to his classic look for next year's Avengers 4.</p>
-                                                </div>
-                                            </div>
-                                            <div class="row news">
-                                                <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <img class="rounded" height="100%" width="100%" src="images/news/cel-2.jpg">
-                                                </div>
-                                                <div class="col-12 col-md-8 highlight">
-                                                    <h3 style="font-family:Impact"><a href="#">Damon Caro Interview: Batman v Superman's Warehouse Scene</a></h3>
-                                                    <p style="font-size: 1.4em">Stunt coordinator Damon Caro and his stunt team. Caro has worked on every one of Snyder's feature films, even participating in his more recent short film, Snow Steam Iron.</p>
-                                                </div>
-                                            </div>
-                                            <div class="row news">
-                                                <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <img class="rounded" height="100%" width="100%" src="images/news/cel-3.jpg">
-                                                </div>
-                                                <div class="col-12 col-md-8 highlight">
-                                                    <h3 style="font-family:Impact"><a href="#">James Bond Rumor: Henry Cavill Eyed To Replace Daniel Craig After Bond 25</a></h3>
-                                                    <p style="font-size: 1.4em">Henry Cavill is reportedly being eyed to be the next James Bond. In 2011, Cavill snagged the highly coveted role of Warner Bros. new Superman, but his superhero career hasn't gone according to plan.</p>
-                                                </div>
-                                            </div>
-                                            <div class="row news">
-                                                <div class="col-0 col-md-4 d-none d-md-block zoom">
-                                                    <img class="rounded" height="100%" width="100%" src="images/news/cel-4.jpg">
-                                                </div>
-                                                <div class="col-12 col-md-8 highlight">
-                                                    <h3 style="font-family:Impact"><a href="#">Michael B. Jordan Playing Tom Clancy's John Clark In Film Series</a></h3>
-                                                    <p style="font-size: 1.4em">Michael B. Jordan will star in a new film series based on the Tom Clancy character John Clark. </p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col d-flex vmore">
-                                                    <div class="ml-auto mt-1">
-                                                        <a href="#">View More</a>
-                                                        <i class="fa fa-chevron-right"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>   
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <footer> 
             <div class="container-fluid">
                 <div class="text-center row">
                     <div class="col-md-4">
-                        <img src="./images/logo.png" class="img-fluid mt-3">
                         <hr>
+                        <h2>MR CRITIC</h2>
+                        <hr><br>
                         <p>Movies</p>
                         <p>TV Shows</p>
                         <p>Wishlist</p>
@@ -274,7 +126,7 @@
                     <div class="col-md-4 social">
                         <hr>
                         <h2>Social</h2>
-                        <hr>
+                        <hr><br>
                         <a href="#" class="fa fa-facebook"></a>
                         <a href="#" class="fa fa-twitter"></a>
                         <a href="#" class="fa fa-google"></a>
@@ -284,7 +136,7 @@
                     <div class="col-md-4">
                         <hr >
                         <h2>Contact Us</h2>
-                        <hr>
+                        <hr><br>
                         <p>Adress Line 1</p>
                         <p>Adress Line 2</p>
                         <p>Adress Line 3</p>
@@ -304,9 +156,10 @@
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/popper.js/dist/umd/popper.min.js" ></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="js/index.js"></script>
     </body>
 
 </html>
