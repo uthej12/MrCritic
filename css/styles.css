@@ -87,4 +87,12 @@ body
     color: white;
     text-align: center;
     font-size: 1em;
+    margin-top: 150px;
+}
+.movie-tiles{
+    padding: 20px;
+    margin-bottom:30px;
+}
+.movie-card{
+    margin-right:50px;
 }
