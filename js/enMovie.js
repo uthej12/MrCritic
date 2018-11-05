@@ -1,26 +1,15 @@
 var qs = (new URL(document.location)).searchParams;
-var intheaters_id = qs.get('intheaters_id');
-var movie_id = qs.get('id');
+var id = qs.get('id');
 var imgurl = 'https://image.tmdb.org/t/p/w500';
-if(intheaters_id!=null){
-    var id = intheaters_id; 
-    var loc = 'theaters/';
-}
-else {
-    var id = movie_id;
-    var loc = 'topindian/';
-}
-const hostname = "http://localhost:3000/";
+const hostname = "http://localhost:3000/topmovies/";
 $(document).ready(() => {
     if(id != null){
-        console.log(hostname+loc+id);
-        movie = $.getJSON(hostname+loc+id);
+        console.log(hostname+id);
+        movie = $.getJSON(hostname+id);
         movie.done((data) => {
-            if(intheaters_id != null)
-                $(".poster").attr("src", hostname +data.image);
-            else
-                $(".poster").attr("src", data.posterurl);
-
+            $(".poster").attr("src", imgurl +data.poster_path);
+            $(".movieName").append(data.title+" ("+data.release_date.split('-')[0]+")");
+            $('.rating').append(data.vote_average+"<i class='fa fa-star'></i>")
         });
     }
 });

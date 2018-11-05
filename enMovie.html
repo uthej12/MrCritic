@@ -28,7 +28,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Movies</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="./enMovie.html?page=1">Top Movies</a></li>
+                                            <li><a class="dropdown-item" href="./topMovies.html?page=1">Top Movies</a></li>
                                             <li><a class="dropdown-item" href="./TopIndianMovies.html?page=1">Top Indian Movies</a></li>
                                         </ul>
                                     </li>
@@ -41,7 +41,18 @@
                 </div>
             </nav>
             </header>
-            <img  class="poster" height="424px" width="263" style="margin:100px 0px 50px 50px">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 p-5" style="text-align: center">
+                            <img  class="poster" height="300px" width="200px" >
+                        </div>
+                        <div class="col-md-8 p-3">
+                            <h1 class="movieName"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="footer navbar-fixed-bottom"> 
                     <div class="container-fluid ">
                         <div class="text-center row">
@@ -85,5 +96,5 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js" ></script>
-    <script src="js/movie.js"></script>
+    <script src="js/enMovie.js"></script>
 </html>
