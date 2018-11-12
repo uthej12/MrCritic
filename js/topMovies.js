@@ -1,14 +1,12 @@
+import { key, tmdb, njs, img }  from '../js/serverDetails.js';
 var qs= (new URL(document.location)).searchParams;
 var pagenum = Number(qs.get('page')); 
-var imgurl = 'https://image.tmdb.org/t/p/w500';
-var count=0;
 var start =0;
 var end = 20; 
 if(pagenum > 1){
     end = pagenum * 20;
     start = end-20;
 }
-const hostname='http://localhost:3000/';
 $(document).ready(() => {
     $('.pagination #'+pagenum).addClass('active');
     if(pagenum != 1)
@@ -19,30 +17,40 @@ $(document).ready(() => {
         $('.pagination #next').attr("href","topMovies.html?page="+(pagenum+1));
     else
         $('.pagination #next').addClass('disabled');
-    movies = $.get(hostname+"topmovies",);
-    movies.done((data) => {
-        $.each(data, (i,item) => {
-            if(count>=start & count <end){
-                $(".movies-list").append
-                ("<div class='col-12 col-sm-6 movie-tiles pr-5 pl-5 pr-md-2 pl-md-2' height='400px'>"+
-                    "<div class='card movie-card'>"+
-                        "<div class='row'>"+
-                            "<div class='col-12 col-md-5' style='text-align:center'>"+
-                                "<a href='enMovie.html?id="+item._id+"'>"+
-                                "<img class='card-img-top' src='" + imgurl+item.poster_path + "' height='340px' width='240px'><a>"+
-                            "</div>"+
-                            "<div class='col-12 col-md-6 mov-des'>"+
-                                "<h1>"+ item.title +"("+ item.release_date.split("-")[0] +")</h1>"+
-                                "<p class='mov-desc' style='padding: 10px'>"+
-                                    item.overview.split('. ')[0] + "<a href='enMovie.html?id="+item._id+"'>......more</a>"+
-                                "</p>"+
-                            "</div>"+
-                        "</div>"+
-                    "</div>"+
-                "</div>");
-            }count++;
-        });
-    });
+
+
+        var movies=$.ajax({
+            url: njs+'topmovies',
+            method: 'GET',
+            dataType: 'JSON', 
+          })
+          .done((data) => {
+            console.log(data);
+            $.each(data ,(i,item) =>{
+              if(i>start & i<end){
+                $('.movies').append("<div class='row element'>"+
+                                    "<div class='col-5 col-sm-4 mov-img-container'>"+
+                                      "<a href='enMovie.html?_id="+item._id+"'><img src='"+img+item.poster_path+"' class='img-responsive mov-img'></a>"+
+                                    "</div>"+
+                                    "<div class='col-7 col-sm-8' style='padding: 0px'>"+
+                                      "<div class='container-fluid'>"+
+                                        "<div class='row'>"+
+                                          "<div class='col-12'>"+
+                                            "<h2 class='mov-title'><a href='enMovie.html?"+item._id+"'>"+item.title+" </a></h2><h4 class='mov-year'>2018</h4>"+
+                                          "</div>"+
+                                          "<div class='col-12' style='padding: 10px'>"+
+                        
+                                          "</div>"+
+                                        "</div>"+
+                                      "</div>"+
+                                    "</div>"+
+                                    "</div><hr class='div-line'>");
+                  }
+              });
+          })
+          .fail(()=>{
+            console.log('Error');
+          });   
 });
 
 $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {

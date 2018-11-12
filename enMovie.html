@@ -42,6 +42,7 @@
             </nav>
             </header>
             <div class="jumbotron jumbotron-fluid">
+                <div class='layer'>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-4 p-5" style="text-align: center">
@@ -49,9 +50,12 @@
                         </div>
                         <div class="col-md-8 p-3">
                             <h1 class="movieName"></h1>
+                            <h3 style='padding-top: 80px'>Overview</h3>
+                            <p class='overview'></p>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="footer navbar-fixed-bottom"> 
                     <div class="container-fluid ">
@@ -96,5 +100,5 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js" ></script>
-    <script src="js/enMovie.js"></script>
+    <script src="js/enMovie.js" type='module'></script>
 </html>

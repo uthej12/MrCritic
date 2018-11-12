@@ -1,15 +1,19 @@
+import {tmdb, njs, img, backdrop} from '../js/serverDetails.js'
 var qs = (new URL(document.location)).searchParams;
-var id = qs.get('id');
-var imgurl = 'https://image.tmdb.org/t/p/w500';
-const hostname = "http://localhost:3000/topmovies/";
+var _id = qs.get('_id');
+console.log(_id);
 $(document).ready(() => {
-    if(id != null){
-        console.log(hostname+id);
-        movie = $.getJSON(hostname+id);
+    if(_id != null){
+        console.log(njs+"topmovies/"+_id);
+        var movie = $.getJSON(njs+"topmovies/"+_id);
         movie.done((data) => {
-            $(".poster").attr("src", imgurl +data.poster_path);
+            console.log(data);
+            $('.jumbotron').css({'background-image':'url('+backdrop+data.backdrop_path+')','color':'white'});
+            $(".poster").attr("src", img +data.poster_path);
             $(".movieName").append(data.title+" ("+data.release_date.split('-')[0]+")");
-            $('.rating').append(data.vote_average+"<i class='fa fa-star'></i>")
+            $('.rating').append(data.vote_average+"<i class='fa fa-star'></i>");
+            $('.overview').append(data.overview);
+            
         });
     }
 });
