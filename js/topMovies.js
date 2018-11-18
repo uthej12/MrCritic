@@ -36,10 +36,10 @@ $(document).ready(() => {
                                       "<div class='container-fluid'>"+
                                         "<div class='row'>"+
                                           "<div class='col-12'>"+
-                                            "<h2 class='mov-title'><a href='enMovie.html?"+item._id+"'>"+item.title+" </a></h2><h4 class='mov-year'>2018</h4>"+
+                                            "<h2 class='mov-title'><a href='enMovie.html?_id="+item._id+"'>"+item.title+" </a></h2><h4 class='mov-year'>"+item.release_date.split('-')[0]+"</h4>"+
                                           "</div>"+
-                                          "<div class='col-12' style='padding: 10px'>"+
-                        
+                                          "<div class='col-12'>"+
+                                              "<div class='mov-desc'><p>"+item.overview.split(". ")[0]+item.overview+"</p></div>"+
                                           "</div>"+
                                         "</div>"+
                                       "</div>"+

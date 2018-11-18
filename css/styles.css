@@ -124,8 +124,11 @@ body
 }
 .mov-desc{
     line-height:2em;
-    height:13em;
+    height:12em;
     overflow:hidden;
+    text-overflow: ellipsis;    
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    padding-top: 2em;
 }
 
 
@@ -156,6 +159,10 @@ body
     .mov-details .det{
         margin-top: 20px;
     }
+    .mov-list .mov-elements .element{
+        max-height: 200px;
+        margin-right: 0px;
+    }
 }
 .mov-list .title{
     text-align:center;
@@ -166,7 +173,7 @@ body
     border-right: 2px solid #f2f2f2;
 }
 .mov-list .mov-elements .element{
-    height: 220px;
+    height: 320px;
 }
 .mov-list .mov-elements .element .mov-img-container{
     text-align: center;
@@ -177,6 +184,7 @@ body
     max-width: 100%;
     border-radius: 3px;
     transition: transform .2s;
+    margin-right: 60px;
 }
 .mov-list .mov-elements .element .mov-img-container .mov-img:hover{
     transform: scale(1.08);
