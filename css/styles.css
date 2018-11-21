@@ -2,7 +2,26 @@ body
 {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
 .navbar{
     background-color: #339980;
 }
@@ -163,6 +182,18 @@ body
         max-height: 200px;
         margin-right: 0px;
     }
+    .jumbotron .poster{
+        height: 300px;
+        width: 200px;
+    }
+    .cast-container{
+        padding: 30px;
+        padding-right: 0px;
+    }
+    .mov-desc{
+        height: 100px;
+        overflow: hidden;
+    }
 }
 .mov-list .title{
     text-align:center;
@@ -209,8 +240,20 @@ body
 .overview{
     padding-right: 120px;
 }
-}
 .jumbotron{
+    background-size: 100%;
+}
+.jumbotron .poster{
+    height: 400px;
+    width: 250px;
+}
+.cast-container{
+    padding: 30px 30px 30px 50px;
+}
+}
+
+.jumbotron{
+    color: white;
     padding-top: 60px;
     padding-bottom: 10px;
     box-shadow: inset 0 0 12em 6em black;
@@ -218,4 +261,80 @@ body
 .layer{
     background:linear-gradient(rgba(14, 13, 13, 0.699), rgba(14, 13, 13, 0.699)) !important;
     align-content: center;
+}
+.star-rating i{
+    display: inline;
+    padding: 0px;
+    margin-left: 0px;
+}
+.fa-star{
+    color: yellow;
+}
+.star-rating{
+    margin-top: 10px;
+    padding: 0px;
+}
+.star-rating h4{
+    display: inline;
+
+}
+.actions {
+    background-color: transparent; 
+    color: white; 
+    border: 1px solid #fff;
+    height: 40px;
+    width:40px;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.actions:hover {
+    background-color: #fff;
+    color: black;
+}
+.comment-container .avatar{
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    display: inline;
+}
+.comment-container{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    min-height: 100px;
+    padding: 10px;
+    margin-bottom: 10px; 
+}
+.comment-container h5{
+    vertical-align: middle;
+    display: inline;
+    margin-left: 5px;
+}
+.comment-container .comment{
+    font-size: 1.5em;
+    margin: 20px 0px 10px 0px;
+}
+.new-comment-container .new-comment{
+    height: 100px;
+    width: 100%;
+}
+.container-outer { overflow: scroll; height: 200px; padding: 0%}
+.container-inner {width: 2080px; padding: 0%;height: 95%}
+.rec .rec-movie{
+    margin:5px 10px 0px 0px;
+    height: 95%;
+    width: 250px;
+    display:inline-block;
+    padding: 0px;
+}
+.rec .rec-movie .rec-img{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 2%;
 }

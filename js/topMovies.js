@@ -1,4 +1,4 @@
-import { key, tmdb, njs, img }  from '../js/serverDetails.js';
+import { key, tmdb, njs, img, cast_img}  from '../js/serverDetails.js';
 var qs= (new URL(document.location)).searchParams;
 var pagenum = Number(qs.get('page')); 
 var start =0;
@@ -30,7 +30,7 @@ $(document).ready(() => {
               if(i>start & i<end){
                 $('.movies').append("<div class='row element'>"+
                                     "<div class='col-5 col-sm-4 mov-img-container'>"+
-                                      "<a href='enMovie.html?_id="+item._id+"'><img src='"+img+item.poster_path+"' class='img-responsive mov-img'></a>"+
+                                      "<a href='enMovie.html?_id="+item._id+"'><img src='"+cast_img+item.poster_path+"' class='img-responsive mov-img'></a>"+
                                     "</div>"+
                                     "<div class='col-7 col-sm-8' style='padding: 0px'>"+
                                       "<div class='container-fluid'>"+
