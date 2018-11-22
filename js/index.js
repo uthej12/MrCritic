@@ -1,4 +1,4 @@
-import {njs, tmdb, img, v3, v3key,backdrop, user} from '../js/serverDetails.js'
+import {njs, tmdb, img, v3, v3key,backdrop} from '../js/serverDetails.js'
 
 var items=[];
 $(document).ready(() => {
@@ -40,6 +40,42 @@ $("#loginButton").on('click',()=> {
                     $('.auth').hide();
                     $('.authenticated').show();
                     localStorage.setItem('token',msg.token);
+                    location.reload();
+                }
+            },
+            error: (err)=>{
+                alert('Invalid Credentials');
+                console.log(err);
+            }
+        });
+    }
+    else{
+        alert("Enter valid data");
+    }
+});
+$('#signup').on('click',()=>{
+    var name = $('[name="name"]').val();
+    var email = $('[name="email"]').val();
+    var uname = $('[name="runame"]').val();
+    var password = $('[name="rpassword"]').val();
+    var password2 = $('[name="password2"]').val();
+    console.log(JSON.stringify({"name":name,"email":email,"username":uname,"password":password}));
+    if(uname != "" && password != ""){
+        $.ajax({
+            type:'POST',
+            dataType: 'json',
+            contentType:'application/json;charset=utf-8',
+            url:njs+'users/signup',
+            data:JSON.stringify({"name":name,"email":email,"username":uname,"password":password}),
+            success: (msg)=>{
+                console.log(msg);
+                if(msg.success == true){
+                    $('#registerModal').modal('toggle');
+                    $('#loginModal').modal('toggle');
+                    //$('.auth').hide();
+                    //$('.authenticated').show();
+                    //localStorage.setItem('token',msg.token);
+                    //location.reload();
                 }
             },
             error: (err)=>{
@@ -63,6 +99,7 @@ else{
             localStorage.clear();
             $('.auth').show();
             $('.authenticated').hide();
+            location.reload();
         }
     });
 }
