@@ -316,6 +316,32 @@ body
     display: inline;
     margin-left: 5px;
 }
+.authenticated .dropdown-menu{
+    width: 10px !important;
+}
+.authenticated .avatar{
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 20%;
+    display: inline;
+}
+.authenticated .logo{
+    vertical-align: middle;
+    text-decoration: none;
+    color: white;
+    padding-right: 10px;
+}
+.authenticated .name{
+    vertical-align: middle;
+    text-decoration: none;
+    color: white;
+    padding-right: 5px;
+    display: inline;
+    font-weight: lighter;
+    font-size: 1.2em;
+}
+
 .comment-container .comment{
     font-size: 1.5em;
     margin: 20px 0px 10px 0px;

@@ -90,6 +90,21 @@ $('#signup').on('click',()=>{
 });
 }
 else{
+    $.ajax({
+        type:'GET',
+        url:njs+'users',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer '+ localStorage.getItem('token'));
+        },
+        dataType:'json',
+        success:(user)=>{
+            $('.logo .name').append(user.name);
+            console.log(user);
+        },
+        error:(err)=>{
+            console.log(err);
+        }
+    });
     $('.authenticated').show();
     $('.auth').hide();
     $('#logout').click(()=>{

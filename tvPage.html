@@ -43,7 +43,15 @@
                         <button type='button' class='btn btn-outline-light ml-3' data-toggle="modal" data-target="#registerModal">SignUp</button>
                     </div>
                     <div class="authenticated">
-                        <button id='logout' type='button' class='btn btn-outline-light ml-auto'>Logout</button>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle logo py-0" id="userDropdownMenu" data-toggle="dropdown">
+                                <div class="name "></div>
+                                <span><img src="./images/user.png" alt="user" class='avatar'></span>
+                            </a>            
+                            <div class="dropdown-menu dropdown-menu-right" >
+                                <a id='logout' href="#" class='dropdown-item'>Logout</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -89,8 +97,124 @@
             </div>
         </div>
         
-            <img  class="poster" height="424px" width="263" style="margin:100px 0px 50px 50px">
-            <div class="footer navbar-fixed-bottom"> 
+        <div class="jumbotron jumbotron-fluid" style='margin-bottom: 0%;'>
+            <div class='layer'>
+            <div class="container-fluid">
+                <div class="row" >
+                    <div class="col-lg-4 p-5" style="text-align: center">
+                        <img  class="poster" >
+                    </div>
+                    <div class="col-lg-8 p-5">
+                        <h1 class="movieName" style='display: inline;'></h1>
+                        <h4 class='mov-year' style='display: inline;color:#D3D3D3'></h4>
+                        <div class="container-fluid" style='padding: 0px;'>
+                            <div class="row star-rating">
+                                <div class="col">
+                                    <i class='fa fa-star fa-2x'></i><h4></h4>
+                                    <button class="actions" style="margin-left:20px;"><i class="fa fa-heart " style="margin: 0%;padding: 0%"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 style='margin-top: 20px'>Overview</h3>
+                        <p class='overview'></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        
+        <div class="container-fluid">
+            <div class="row" >
+                <div class="col-lg-9">
+                    <div class="container-fluid cast-container">
+                        <div class="row">
+                            <h3>Top Billed Cast</h3>
+                        </div>
+                        <div class="row cast">
+                        </div><br><br>
+                        
+                        <div class="container-fluid">
+                            <div class="row">
+                                <h4>Comments</h4>
+                            </div><br>
+                            <div class='row comments'>
+                                <div class='col-12 col-lg-10 card comment-container'>
+                                    <div class='container-fluid' style='padding: 0'>
+                                        <div class='col-12'>
+                                            <span><img src='./images/user.png' alt='user' class='avatar'></span>
+                                            <h5>Vikas </h5>
+                                        </div>
+                                        <div class='col-12 comment'>
+                                            <p>This is a comment.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row add-comments">
+                                <div class="col-12 col-lg-10 card comment-container new">
+                                        <div class="container-fluid" style='padding: 0'>
+                                        <div class="col-12">
+                                            <span><img src="./images/user.png" alt="user" class='avatar'></span>
+                                            <h5>You </h5>
+                                        </div>
+                                        <div class='col-12 comment'>
+                                            <textarea class='form-control new-comment' id='comment' placeholder="Enter Your comment here"></textarea>
+                                        </div>
+                                        <div class="col-12" style="text-align:right">
+                                            <button id='submit-comment' class='btn btn-primary'>Submit</button>
+                                            <button id='clear-text' class='btn'>Clear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="container-fluid" style='margin-top: 20px;'>
+                            <h4>Recommendations</h4>
+                            <div class="col-12 container-outer">
+                                <div class="container-inner rec">
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-3" style='background-color:#f2f2f2;'>
+                    <div class="container-fluid" style='padding: 20px;'>
+                        <div class="row"><h4>Facts</h4></div>
+                        <h5>Air Date</h5>
+                        <p class='release'></p><br>
+                        <div class="last-air">
+
+                        </div><br>
+                        <div class="next-air">
+
+                        </div>
+                        <h5>Original Language</h5>
+                        <p class='ol'></p><br>
+                        <div class='genre'>
+
+                        </div>
+                        <div class="network">
+
+                        </div>
+                        <div class="director">
+
+                        </div><br>
+                        <div class="producer">
+
+                        </div><br>
+                        <div class="music">
+
+                        </div><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="footer navbar-fixed-bottom" style="margin-top: 0px;"> 
                     <div class="container-fluid ">
                         <div class="text-center row">
                             <div class="col-md-4 links">
@@ -133,5 +257,5 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js" ></script>
-    <script src="js/tvPage.js"></script>
+    <script src="js/tvPage.js"  type='module'></script>
 </html>

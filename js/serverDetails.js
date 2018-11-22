@@ -6,3 +6,4 @@ export const cast_img = 'https://image.tmdb.org/t/p/w200/';
 export const backdrop ='https://image.tmdb.org/t/p/w1280/';
 export const v3 = 'https://api.themoviedb.org/3/movie/';
 export const v3key = '28eb418614d2421152a6fe98dee63b06';
+export const v3tv = 'https://api.themoviedb.org/3/tv/';
