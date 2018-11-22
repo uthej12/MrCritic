@@ -2,7 +2,7 @@ var qs= (new URL(document.location)).searchParams;
 var pagenum = Number(qs.get('page')); 
 var imgurl = 'https://image.tmdb.org/t/p/w500';
 var count=0;
-var start =0;
+var start =-1;
 var end = 20; 
 if(pagenum > 1){
     end = pagenum * 20;
@@ -22,7 +22,7 @@ $(document).ready(() => {
     movies = $.get(hostname+"toptv",);
     movies.done((data) => {
         $.each(data, (i,item) => {
-            if(count>=start & count <end){
+            if(i>start & i <end){
                 $(".movies-list").append
                 ("<div class='col-12 col-sm-6 movie-tiles pr-5 pl-5 pr-md-2 pl-md-2' height='400px'>"+
                     "<div class='card movie-card'>"+
@@ -40,10 +40,56 @@ $(document).ready(() => {
                         "</div>"+
                     "</div>"+
                 "</div>");
-            }count++;
+            }
         });
     });
 });
+
+
+if(localStorage.getItem('token') == null){
+    $('.authenticated').hide();
+    
+    $("#loginButton").on('click',()=> {
+        var uname = $('[name="uname"]').val();
+        var password = $('[name="password"]').val();
+        console.log(JSON.stringify({"username":uname,"password":password}))
+        if(uname != "" && password != ""){
+            $.ajax({
+                type:'POST',
+                dataType: 'json',
+                contentType:'application/json;charset=utf-8',
+                url:njs+'users/login',
+                data:JSON.stringify({"username":uname,"password":password}),
+                success: (msg)=>{
+                    console.log(msg);
+                    if(msg.success == true){
+                        $('#loginModal').modal('toggle');
+                        $('.auth').hide();
+                        $('.authenticated').show();
+                        localStorage.setItem('token',msg.token);
+                    }
+                },
+                error: (err)=>{
+                    alert('Invalid Credentials');
+                    console.log(err);
+                }
+            });
+        }
+        else{
+            alert("Enter valid data");
+        }
+    });
+    }
+    else{
+        $('.authenticated').show();
+        $('.auth').hide();
+        $('#logout').click(()=>{
+            console.log(localStorage.getItem('token'));
+            localStorage.clear();
+            $('.auth').show();
+            $('.authenticated').hide();
+        });
+    }
 
 $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
     if (!$(this).next().hasClass('show')) {

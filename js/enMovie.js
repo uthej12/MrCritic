@@ -81,8 +81,25 @@ $(document).ready(() => {
                         }
                     });
                 });
+            var comments = $.getJSON(njs+'topmovies/'+data._id+'/comments')
+                .done((comments) => {
+                $.each(comments, (i,comment) =>{
+                    $('.comments').append(
+                        "<div class='col-12 col-lg-10 card comment-container'>"+
+                            "<div class='container-fluid' style='padding: 0'>"+
+                                "<div class='col-12'>"+
+                                    "<span><img src='./images/user.png' alt='user' class='avatar'></span>"+
+                                    "<h5>"+comment.author +"</h5>"+
+                                "</div>"+
+                                "<div class='col-12 comment'>"+
+                                    "<p>"+comment.comment+"</p>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>")
+                });    
+            });
             
-                console.log(data.id);
+                console.log(data._id);
             $.ajax({
                 url:v3+data.id+'/credits?api_key='+v3key,
                 type:'GET'
@@ -135,7 +152,50 @@ $(document).ready(() => {
     }
 });
 
-
+if(localStorage.getItem('token') == null){
+    $('.authenticated').hide();
+    
+    $("#loginButton").on('click',()=> {
+        var uname = $('[name="uname"]').val();
+        var password = $('[name="password"]').val();
+        console.log(JSON.stringify({"username":uname,"password":password}))
+        if(uname != "" && password != ""){
+            $.ajax({
+                type:'POST',
+                dataType: 'json',
+                contentType:'application/json;charset=utf-8',
+                url:njs+'users/login',
+                data:JSON.stringify({"username":uname,"password":password}),
+                success: (msg)=>{
+                    console.log(msg);
+                    if(msg.success == true){
+                        $('#loginModal').modal('toggle');
+                        $('.auth').hide();
+                        $('.authenticated').show();
+                        localStorage.setItem('token',msg.token);
+                    }
+                },
+                error: (err)=>{
+                    alert('Invalid Credentials');
+                    console.log(err);
+                }
+            });
+        }
+        else{
+            alert("Enter valid data");
+        }
+    });
+    }
+    else{
+        $('.authenticated').show();
+        $('.auth').hide();
+        $('#logout').click(()=>{
+            console.log(localStorage.getItem('token'));
+            localStorage.clear();
+            $('.auth').show();
+            $('.authenticated').hide();
+        });
+    }
 $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
     if (!$(this).next().hasClass('show')) {
       $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
