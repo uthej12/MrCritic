@@ -1,15 +1,12 @@
-import {njs, tmdb, img, v3, v3key,backdrop} from '../js/serverDetails.js'
+import { key, tmdb, njs, img, cast_img}  from '../js/serverDetails.js';
 var qs= (new URL(document.location)).searchParams;
 var pagenum = Number(qs.get('page')); 
-var count=0;
-var start =0;
-var end = 25; 
+var start =-1;
+var end = 20; 
 if(pagenum > 1){
-    end = pagenum * 25;
-    start = end-25;
+    end = pagenum * 20;
+    start = end-20;
 }
-console.log(pagenum);
-const hostname='http://localhost:3000/';
 $(document).ready(() => {
     $('.pagination #'+pagenum).addClass('active');
     if(pagenum != 1)
@@ -20,32 +17,42 @@ $(document).ready(() => {
         $('.pagination #next').attr("href","TopIndianMovies.html?page="+(pagenum+1));
     else
         $('.pagination #next').addClass('disabled');
-    var movies = $.get(hostname+"topindian",);
-    movies.done((data) => {
-        $.each(data, (i,item) => {
-            if(count>=start & count <end){
-                $(".movies-list").append
-                ("<div class='col-12 col-sm-6 movie-tiles pr-5 pl-5 pr-md-2 pl-md-2' height='400px'>"+
-                    "<div class='card movie-card'>"+
-                        "<div class='row'>"+
-                            "<div class='col-12 col-md-5' style='text-align:center'>"+
-                                "<a href='movie.html?id="+item._id+"'>"+
-                                "<img class='card-img-top' src='" + item.posterurl + "' height='340px' width='240px'><a>"+
-                            "</div>"+
-                            "<div class='col-12 col-md-6 mov-des'>"+
-                                "<h1>"+ item.title +"("+ item.releaseDate.split("-")[0] +")</h1>"+
-                                "<p class='mov-desc' style='padding: 10px'>"+
-                                    item.storyline.split('. ')[0] + "<a href='movie.html?id="+item._id+"'>.....more</a>"+
-                                "</p>"+
-                            "</div>"+
-                        "</div>"+
-                    "</div>"+
-                "</div>");
-            }count++;
-        });
-        console.log(count);
-    });
+
+
+        var movies=$.ajax({
+            url: njs+'topindian',
+            method: 'GET',
+            dataType: 'JSON', 
+          })
+          .done((data) => {
+            console.log(data);
+            $.each(data ,(i,item) =>{
+              if(i>start & i<end){
+                $('.movies').append("<div class='row element'>"+
+                                    "<div class='col-5 col-sm-4 mov-img-container'>"+
+                                      "<a href='movie.html?_id="+item._id+"'><img src='"+cast_img+item.poster_path+"' class='img-responsive mov-img'></a>"+
+                                    "</div>"+
+                                    "<div class='col-7 col-sm-8' style='padding: 0px'>"+
+                                      "<div class='container-fluid'>"+
+                                        "<div class='row'>"+
+                                          "<div class='col-12'>"+
+                                            "<h2 class='mov-title'><a href='movie.html?_id="+item._id+"'>"+item.title+" </a></h2><h4 class='mov-year'>"+item.release_date.split('-')[0]+"</h4>"+
+                                          "</div>"+
+                                          "<div class='col-12'>"+
+                                              "<div class='mov-desc'><p>"+item.overview.split(". ")[0]+item.overview+"</p></div>"+
+                                          "</div>"+
+                                        "</div>"+
+                                      "</div>"+
+                                    "</div>"+
+                                    "</div><hr class='div-line'>");
+                  }
+              });
+          })
+          .fail(()=>{
+            console.log('Error');
+          });   
 });
+
 
 if(localStorage.getItem('token') == null){
     $('.authenticated').hide();
