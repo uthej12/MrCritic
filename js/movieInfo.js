@@ -1,13 +1,15 @@
 import {tmdb, njs, img, backdrop, v3,v3key} from '../js/serverDetails.js'
 var qs = (new URL(document.location)).searchParams;
-var _id = qs.get('_id');
-console.log(_id);
-function get_date(myArray){
-    for (var i=0; i < myArray.length; i++) {
-        if (myArray[i].iso_3166_1 === 'IN' || myArray[i].iso_3166_1 == 'US') {
-            return myArray[i].release_dates[0].release_date;
-        }
-    }
+var id = qs.get('id');
+console.log(id);
+function convert_date(date){
+    var year        = Number(date.substring(0,4));
+    var month       = Number(date.substring(5,7));
+    var day         = Number(date.substring(8,11));
+
+    var ISOdate = new Date(year,month-1,day).toString().split(' ');
+    var dateFormated = ISOdate[0]+" "+ISOdate[2]+" "+ISOdate[1]+" , "+ISOdate[3];
+    return dateFormated;
 }
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -36,9 +38,9 @@ $(document).ready(() => {
                 "</div>");
 
     });
-    if(_id != null){
-        console.log(njs+"topmovies/"+_id);
-        var movie = $.getJSON(njs+"topmovies/"+_id);
+    if(id != null){
+        console.log(v3+id+'?api_key='+v3key);
+        var movie = $.getJSON(v3+id+'?api_key='+v3key);
         movie.done((data) => {
             console.log(data);
             $('.jumbotron').css({'background-image':'url('+backdrop+data.backdrop_path+')'});
@@ -47,6 +49,7 @@ $(document).ready(() => {
             $('.mov-year').append(" ("+data.release_date.split('-')[0]+")")
             $('.star-rating h4').append(data.vote_average);
             $('.overview').append(data.overview);
+            $('.release').append(convert_date(data.release_date));
             var language = {'en':'English','hn':'Hindi'};
             $('.ol').append(language[data.original_language]);
             $.getJSON(v3+data.id+'?api_key='+v3key).done((det)=>{
@@ -62,20 +65,12 @@ $(document).ready(() => {
                 }
             });
             
-            var releaseDate = $.getJSON(v3+data.id+'/release_dates?api_key='+v3key)
-            .done((release)=> {
-                var release = new Date(get_date(release.results));
-                var dateISO = release.toString().split(' ');
-                var date = dateISO[2]+" "+dateISO[1]+","+dateISO[3];
-                $('.release').append(date);
-                
-            });
             var getRecomendations = $.getJSON(v3+data.id+'/recommendations?api_key='+v3key)
                 .done((recomended)=>{
                     $.each(recomended.results, (i,movie)=>{
                         if(i<8){
                             $('.rec').append("<div class ='rec-movie'>"+
-                                                "<img class='rec-img' src='"+img+movie.backdrop_path+"'>"+
+                                                "<a href='movieInfo.html?id="+movie.id+"'><img class='rec-img' src='"+img+movie.backdrop_path+"'></a>"+
                                                 "<div class='rec-text' style='overflow:hidden'><b>"+movie.title.slice(0,22)+"</b></div>"+
                                             "</div>");
                         }
@@ -99,7 +94,6 @@ $(document).ready(() => {
                 });    
             });
             
-                console.log(data._id);
             $.ajax({
                 url:v3+data.id+'/credits?api_key='+v3key,
                 type:'GET'

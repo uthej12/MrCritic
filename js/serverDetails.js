@@ -7,3 +7,7 @@ export const backdrop ='https://image.tmdb.org/t/p/w1280/';
 export const v3 = 'https://api.themoviedb.org/3/movie/';
 export const v3key = '28eb418614d2421152a6fe98dee63b06';
 export const v3tv = 'https://api.themoviedb.org/3/tv/';
+export const inTheaters = 'https://api.themoviedb.org/3/discover/movie?api_key=28eb418614d2421152a6fe98dee63b06&language=en-US&region=IN&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&release_date.gte=2018-11-01&release_date.lte=2018-11-25&with_release_type=3%7C2&with_original_language=en%7Chi'; 
+export const topEnglish = 'https://api.themoviedb.org/3/discover/movie?api_key=28eb418614d2421152a6fe98dee63b06&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&vote_count.gte=1000&with_original_language=en&page=';
+export const topIndian = 'https://api.themoviedb.org/3/discover/movie?api_key=28eb418614d2421152a6fe98dee63b06&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&vote_count.gte=10&vote_average.gte=7&with_original_language=hi%7Cte%7Cta%7Cml&page=';
+export const topTv = 'https://api.themoviedb.org/3/discover/tv?api_key=28eb418614d2421152a6fe98dee63b06&language=en-US&sort_by=popularity.desc&vote_average.gte=7.3&vote_count.gte=150&include_null_first_air_dates=false&page=';

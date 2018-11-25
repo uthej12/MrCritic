@@ -1,7 +1,16 @@
-import {tmdb, njs, img, backdrop, v3,v3key} from '../js/serverDetails.js'
+import {njs, tmdb, img, v3tv, v3key,backdrop} from '../js/serverDetails.js'
 var qs = (new URL(document.location)).searchParams;
-var _id = qs.get('_id');
-console.log(_id);
+var id = qs.get('id');
+console.log(id);
+function convert_date(date){
+    var year        = Number(date.substring(0,4));
+    var month       = Number(date.substring(5,7));
+    var day         = Number(date.substring(8,11));
+
+    var ISOdate = new Date(year,month-1,day).toString().split(' ');
+    var dateFormated = ISOdate[0]+" "+ISOdate[2]+" "+ISOdate[1]+" , "+ISOdate[3];
+    return dateFormated;
+}
 function get_date(myArray){
     for (var i=0; i < myArray.length; i++) {
         if (myArray[i].iso_3166_1 === 'IN' || myArray[i].iso_3166_1 == 'US') {
@@ -36,52 +45,66 @@ $(document).ready(() => {
                 "</div>");
 
     });
-    if(_id != null){
-        console.log(njs+"topindian/"+_id);
-        var movie = $.getJSON(njs+"topindian/"+_id);
-        movie.done((data) => {
-            console.log(data);
+    if(id != null){
+        console.log(v3tv+id+"?api_key="+v3key);
+        var tv = $.getJSON(v3tv+id+"?api_key="+v3key);
+        tv.done((data) => {
             $('.jumbotron').css({'background-image':'url('+backdrop+data.backdrop_path+')'});
             $(".poster").attr("src", img +data.poster_path);
-            $(".movieName").append(data.title);
-            $('.mov-year').append(" ("+data.release_date.split('-')[0]+")")
+            $(".movieName").append(data.name);
+            $('.mov-year').append(" ("+data.first_air_date.split('-')[0]+")");
+            $('.release').append(convert_date(data.first_air_date));
             $('.star-rating h4').append(data.vote_average);
             $('.overview').append(data.overview);
-            var language = {'en':'English','hi':'Hindi'};
+            var language = {'en':'English','hn':'Hindi'};
             $('.ol').append(language[data.original_language]);
-            $.getJSON(v3+data.id+'?api_key='+v3key).done((det)=>{
-                $('.budget').append(formatter.format(det.budget));
-                if(det.revenue >0)
-                    $('.box').append(formatter.format(det.revenue));
-                else
-                    $('.box').append(formatter.format(det.budget));
-                for(var i=0;i<det.genres.length;i++){
-                    if(i>0)
-                        $('.genre').append(', ');
-                    $('.genre').append(det.genres[i].name + " ");
+            
+            
+            $.getJSON(v3tv+data.id+'?api_key='+v3key).done((det)=>{
+                
+                if(det.last_episode_to_air != "")
+                    $('.last-air')
+                    .append("<h5>Last Episode Aired</h5><p>"+
+                    "S"+("0" + det.last_episode_to_air.season_number).slice(-2)+"E"+
+                    ("0" + det.last_episode_to_air.episode_number).slice(-2)+" <br>"+
+                    det.last_episode_to_air.name+" <br>"+convert_date(det.last_episode_to_air.air_date)+"</p>");
+                
+                if(det.next_episode_to_air != null)
+                    $('.next-air')
+                    .append("<h5>Next Episode</h5><p>"+
+                    "S"+("0" + det.next_episode_to_air.season_number).slice(-2)+"E"+
+                    ("0" + det.next_episode_to_air.episode_number).slice(-2)+" <br>"+
+                    det.next_episode_to_air.name+" <br>"+convert_date(det.next_episode_to_air.air_date)+"</p><br>");
+
+                if(det.networks.length > 0){
+                    $('.network').append("<h5>Network</h5>"+det.networks[0].name);
+                    $('.network').css('margin-bottom','40px');
+                }
+                    
+
+                if(det.genres.length>0){
+                    $('.genre').append("<h5>Genres</h5>");
+                    for(var i=0;i<det.genres.length;i++){
+                        if(i>0)
+                            $('.genre').append(', ');
+                        $('.genre').append(det.genres[i].name + " ");
+                    }
+                    $('.genre').css('margin-bottom','40px');
                 }
             });
             
-            var releaseDate = $.getJSON(v3+data.id+'/release_dates?api_key='+v3key)
-            .done((release)=> {
-                var release = new Date(get_date(release.results));
-                var dateISO = release.toString().split(' ');
-                var date = dateISO[2]+" "+dateISO[1]+","+dateISO[3];
-                $('.release').append(date);
-                
-            });
-            var getRecomendations = $.getJSON(v3+data.id+'/recommendations?api_key='+v3key)
+            var getRecomendations = $.getJSON(v3tv+data.id+'/recommendations?api_key='+v3key)
                 .done((recomended)=>{
-                    $.each(recomended.results, (i,movie)=>{
+                    $.each(recomended.results, (i,tv)=>{
                         if(i<8){
                             $('.rec').append("<div class ='rec-movie'>"+
-                                                "<img class='rec-img' src='"+img+movie.backdrop_path+"'>"+
-                                                "<div class='rec-text' style='overflow:hidden'><b>"+movie.title.slice(0,22)+"</b></div>"+
+                                                "<a href='tvInfo.html?id="+tv.id+"'><img class='rec-img' src='"+img+tv.backdrop_path+"'></a>"+
+                                                "<div class='rec-text' style='overflow:hidden'><b>"+tv.name.slice(0,22)+"</b></div>"+
                                             "</div>");
                         }
                     });
                 });
-            var comments = $.getJSON(njs+'topmovies/'+data._id+'/comments')
+            var comments = $.getJSON(njs+'toptv/'+data._id+'/comments')
                 .done((comments) => {
                 $.each(comments, (i,comment) =>{
                     $('.comments').append(
@@ -98,10 +121,8 @@ $(document).ready(() => {
                         "</div>")
                 });    
             });
-            
-                console.log(data._id);
             $.ajax({
-                url:v3+data.id+'/credits?api_key='+v3key,
+                url:v3tv+data.id+'/credits?api_key='+v3key,
                 type:'GET'
             }).done((cast)=>{
                 $.each(cast.cast, (i,cast_member)=>{
@@ -122,25 +143,27 @@ $(document).ready(() => {
                     }
                 });var d=0;var p=0;var s=0;var m=0;
                 $.each(cast.crew, (i,crew) => { 
-                    if(crew.job === 'Director'){
-                        if(d>0)
+                    if(crew.job === 'Executive Producer'){
+                        if(d==0)
+                            $('.director').append('<h5>Exceutive Producer</h5>');
+                        if(d !== 0  && d<2)
                             $('.director').append(', ');
-                        $('.director').append(crew.name);
+                        if(d<2)
+                            $('.director').append(crew.name," ");
                         d=Number(d)+1;
                     }
                     if(crew.job === 'Producer'){
-                        if(p !== 0)
+                        if(p==0)
+                            $('.producer').append('<h5>Producer</h5>')
+                        if(p !== 0  && p<2)
                             $('.producer').append(', ');
-                        $('.producer').append(crew.name," ");
+                        if(p<2)
+                            $('.producer').append(crew.name," ");
                         p=Number(p)+1;
                     }
-                    if(crew.job === 'Screenplay'){
-                        if(s !== 0)
-                            $('.writer').append(', ');
-                        $('.writer').append(crew.name," ");
-                        s=Number(s)+1;
-                    }
                     if(crew.job === 'Original Music Composer'){
+                        if(m==0)
+                            $('.music').append('<h5>Original Music</h5>')
                         if(m !== 0)
                             $('.music').append(', ');
                         $('.music').append(crew.name," ");
@@ -252,7 +275,6 @@ if(localStorage.getItem('token') == null){
         });
     }
 
-    
 $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
     if (!$(this).next().hasClass('show')) {
       $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");

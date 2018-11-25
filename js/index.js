@@ -1,17 +1,18 @@
-import {njs, tmdb, img, v3, v3key,backdrop} from '../js/serverDetails.js'
+import {njs, tmdb, img, v3, v3key,backdrop, inTheaters} from '../js/serverDetails.js'
 
 var items=[];
 $(document).ready(() => {
 
-    $.getJSON("http://localhost:3000/theaters")
+    $.getJSON(inTheaters)
        .done((data) => {
+        console.log(data.results);
         $(".loading_theaters").css({"display":"none"});
         $(".in_theaters").css({"display":"block"});
-        $.each(data, (i,item) => {
+        $.each(data.results, (i,item) => {
             if(i<6){
                 $(".in_theaters .imgs").append("<div class='col-6 col-md-2 p-2'><div class='zoom '>"+
-                                "<a href='movie.html?intheaters_id="+item._id+"'>"+
-                                "<img class='img-thumbnail' src='http://localhost:3000/"+item.image+"'"+
+                                "<a href='movieInfo.html?id="+item.id+"'>"+
+                                "<img class='img-thumbnail' src='"+img+item.poster_path+"'"+
                                 "height='400px' width='100%'></a></div></div");
             }
         });
