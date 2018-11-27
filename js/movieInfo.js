@@ -1,6 +1,8 @@
 import {tmdb, njs, img, backdrop, v3,v3key} from '../js/serverDetails.js'
 var qs = (new URL(document.location)).searchParams;
 var id = qs.get('id');
+var name = null;
+var commented = false;
 console.log(id);
 function convert_date(date){
     var year        = Number(date.substring(0,4));
@@ -17,32 +19,53 @@ const formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2
 });
 $(document).ready(() => {
-    $("#clear-text").click(()=>{
-        $('.new-comment').val('');
-    });
-    $('#submit-comment').click(()=>{
-        var comment = $('.new-comment').val();
-        $('.new-comment').val('');
-        $('.new').hide();
-        $('.comments')
-        .append("<div class='col-12 col-lg-10 card comment-container'>"+
-                    "<div class='container-fluid' style='padding: 0'>"+
-                        "<div class='col-12'>"+
-                            "<span><img src='./images/user.png' alt='user' class='avatar'></span>"+
-                            "<h5>You </h5>"+
-                        "</div>"+
-                        "<div class='col-12 comment'>"+
-                            "<p>"+comment+"</p>"+
-                        "</div>"+
-                    "</div>"+
-                "</div>");
 
-    });
+
+
+
+    $('.add-comments').hide();
     if(id != null){
         console.log(v3+id+'?api_key='+v3key);
         var movie = $.getJSON(v3+id+'?api_key='+v3key);
         movie.done((data) => {
             console.log(data);
+
+            $.ajax({
+                type:'GET',
+                url:njs+'favorites/movies/',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer '+ localStorage.getItem('token'));
+                }
+            }).done((fav) => {
+                $.each(fav, (i,fav) =>{
+                    if(fav == data.id)
+                        $('#add-to-wishlist').addClass('clicked');
+                })
+            });
+
+            $('#add-to-wishlist').click(()=>{
+                if($('#add-to-wishlist').hasClass('clicked')){
+                    $('#add-to-wishlist').removeClass('clicked');
+                    $.ajax({
+                        type:'DELETE',
+                        url:njs+'favorites/movies/'+data.id,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer '+ localStorage.getItem('token'));
+                        }
+                    }).done((fav)=>console.log(fav));
+                }
+                else{
+                    $('#add-to-wishlist').addClass('clicked');
+                    $.ajax({
+                        type:'POST',
+                        url:njs+'favorites/movies/'+data.id,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer '+ localStorage.getItem('token'));
+                        }
+                    }).done((fav)=>console.log(fav));
+                }      
+            });
+
             $('.jumbotron').css({'background-image':'url('+backdrop+data.backdrop_path+')'});
             $(".poster").attr("src", img +data.poster_path);
             $(".movieName").append(data.title);
@@ -50,7 +73,7 @@ $(document).ready(() => {
             $('.star-rating h4').append(data.vote_average);
             $('.overview').append(data.overview);
             $('.release').append(convert_date(data.release_date));
-            var language = {'en':'English','hn':'Hindi'};
+            var language = {'en':'English','hi':'Hindi','te':'Telugu','ta':'Tamil','ml':'Malayalam'};
             $('.ol').append(language[data.original_language]);
             $.getJSON(v3+data.id+'?api_key='+v3key).done((det)=>{
                 $('.budget').append(formatter.format(det.budget));
@@ -64,6 +87,8 @@ $(document).ready(() => {
                     $('.genre').append(det.genres[i].name + " ");
                 }
             });
+
+
             
             var getRecomendations = $.getJSON(v3+data.id+'/recommendations?api_key='+v3key)
                 .done((recomended)=>{
@@ -76,23 +101,68 @@ $(document).ready(() => {
                         }
                     });
                 });
-            var comments = $.getJSON(njs+'topmovies/'+data._id+'/comments')
+             
+            var comments = $.getJSON(njs+'comments/'+data.id)
                 .done((comments) => {
-                $.each(comments, (i,comment) =>{
-                    $('.comments').append(
-                        "<div class='col-12 col-lg-10 card comment-container'>"+
-                            "<div class='container-fluid' style='padding: 0'>"+
-                                "<div class='col-12'>"+
-                                    "<span><img src='./images/user.png' alt='user' class='avatar'></span>"+
-                                    "<h5>"+comment.author +"</h5>"+
-                                "</div>"+
-                                "<div class='col-12 comment'>"+
-                                    "<p>"+comment.comment+"</p>"+
-                                "</div>"+
-                            "</div>"+
-                        "</div>")
-                });    
+                console.log(comments)
+                var commented = false;
+                if(comments.status != 'unsucessful'){
+                    console.log('Comments',comments);
+                    $.each(comments, (i,comment) =>{
+                        if(comment.author == name){
+                            //console.log('In if',comment.author,name)
+                            commented = true;
+                            $('.comments').append(
+                                "<div class='col-12 col-lg-10 card comment-container'>"+
+                                    "<div class='container-fluid' style='padding: 0'>"+
+                                        "<div class='col-12'>"+
+                                            "<span><img src='./images/user.png' alt='user' class='avatar'></span>"+
+                                            "<h5><u>"+comment.author +"</u></h5>"+
+                                        "</div>"+
+                                        "<div class='col-12 comment'>"+
+                                            "<p>"+comment.comment+"</p>"+
+                                        "</div>"+
+                                    "</div>"+
+                                "</div>")
+                        }
+                        else{
+                            $('.comments').append(
+                                "<div class='col-12 col-lg-10 card comment-container'>"+
+                                    "<div class='container-fluid' style='padding: 0'>"+
+                                        "<div class='col-12'>"+
+                                            "<span><img src='./images/user.png' alt='user' class='avatar'></span>"+
+                                            "<h5>"+comment.author +"</h5>"+
+                                        "</div>"+
+                                        "<div class='col-12 comment'>"+
+                                            "<p>"+comment.comment+"</p>"+
+                                        "</div>"+
+                                    "</div>"+
+                                "</div>")
+                        }
+                    });
+                }
+                if(!commented && name !=null)
+                    $('.add-comments').show();
+                else
+                    $('.add-comments').hide();    
             });
+
+            $('#submit-comment').click(()=>{
+                console.log($('#comment').val());
+                $.ajax({
+                    type:'POST',
+                    url:njs+'comments/'+data.id,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer '+ localStorage.getItem('token'));
+                    },
+                    dataType:'json',
+                    data:{comment:$('#comment').val()}
+                }).done((data)=>{
+                    console.log(data);
+                    location.reload();
+                }); 
+            });
+
             
             $.ajax({
                 url:v3+data.id+'/credits?api_key='+v3key,
@@ -226,6 +296,7 @@ if(localStorage.getItem('token') == null){
             dataType:'json',
             success:(user)=>{
                 $('.logo .name').append(user.name);
+                name = user.name;
                 console.log(user);
             },
             error:(err)=>{
@@ -244,6 +315,7 @@ if(localStorage.getItem('token') == null){
                 location.reload();
             }
         });
+
     }
 
     

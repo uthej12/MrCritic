@@ -37,7 +37,7 @@
                             <li><a class="dropdown-item" href="./topTvShows.html?page=1">TV Shows</a></li>   
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link py-0" href="#">Wishlist</a></li>
+                    <li class="nav-item"><a class="nav-link py-0" href="wishlist.html">Wishlist</a></li>
                     <li class="nav-item active"><a class="nav-link py-0" href="#">Contact Us</a></li>
                 </ul>
                 <div class="auth">
@@ -98,10 +98,104 @@
                 </div>
             </div>
         </div>
+        <!---Register Modal-->
+        <div id='registerModal' class='modal fade' role='dialog'>
+            <div class="modal-dialog">
+                <!----Modal Content-->
+                <div class="modal-content">
+                    <div class="modal-header" style='background-color: #339980;color: white'>
+                        <h5 class="modal-title">Signup</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid" style='padding: 20px;'>
+                            <div class="row" style='padding: 10px;'>
+                                <div class="col-12">
+                                    <label class="col-form-label" for='name'><h5>Name</h5></label>
+                                </div>
+                                <div class="col-12">
+                                    <input class='form-control' type="text" placeholder="Name" name='name' value="" required>
+                                </div>
+                            </div>
+                            <div class="row" style='padding: 10px;'>
+                                <div class="col-12">
+                                    <label class="col-form-label" for='email'><h5>E-mail</h5></label>
+                                </div>
+                                <div class="col-12">
+                                    <input class='form-control' type="email" placeholder="E-Mail" name='email' required value="">
+                                </div>
+                            </div>
+                        <div class="row" style='padding: 10px;'>
+                            <div class="col-12">
+                                <label class="col-form-label" for='uname'><h5>Username</h5></label>
+                            </div>
+                            <div class="col-12">
+                                <input class='form-control' type="text" placeholder="Enter username" name='runame' required value="">
+                            </div>
+                        </div>
+                        <div class="row" style='padding: 10px;'>
+                            <div class="col-12">
+                                <label class="col-form-label" for='password'><h5>Password</h5></label>
+                            </div>
+                            <div class="col-12">
+                                <input class='form-control' type='password' placeholder="Enter Password" name='rpassword' required value="">
+                            </div>
+                        </div>
+                        <div class="row" style='padding: 10px;'>
+                            <div class="col-12">
+                                <label class="col-form-label" for='password2'><h5>Confirm Password</h5></label>
+                            </div>
+                            <div class="col-12">
+                                <input class='form-control' type='password' placeholder="Re Enter Password" name='password2' required value="">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id='signup' type="button" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="jumbotron" style='box-shadow: none;height: 300px;background: #339980;width: 100%;'>
+            <div class="container-fluid" style='height: 100%;'>
+                <div class="row" style="height: 100%;">
+                    <div class="col-12 col-lg-6" style='padding:70px 0px 100px 20px'>
+                        <img src='./images/logo.png' alt="MR CRITIC">
+                    </div>
+                    <div class="col-12 col-lg-6" style='padding:70px 0px 100px 120px'>
+                        <p>Mr Critic is an online database of information related to films, television programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class='display-4'>Our Location</h2>
+                </div>
+                <div class="col-12 col-lg-8" >
+                    <a href="Gopalan+College+of+Engineering+and+Management/@12.9862314,77.7150307,17z/data=!3m1!4b1!4m5!3m4!1s0x3bae11920e734dc9:0xefdf9d49329b63e8!8m2!3d12.9862262!4d77.7172194"><img clas='img-fluid' src="./images/map.jpg" alt="Map" height="100%" width="100%"></a>
+                </div>
+                <div class="col-12 col-lg-4" >
+                    <address style="font-size:1.5em;text-align: center;padding-top: 30px"> 
+                        Example<br>
+                        Hoodi,Whtitefield<br>
+                        Bengaluru,<br>
+                        India<br>
+                        E-Mail : <a href='mailto:mrcritic@mail.com'>mrcritic@mail.com</a> <br>
+                        Phone : <a href='call:+91 123 456 789'>+91 123 456 789</a><br>
+                    </address>
+                </div>
+            </div>
+        </div>
 
-        <div class="footer navbar-fixed-bottom" style='margin-top: 600px;'> 
+        <div class="footer navbar-fixed-bottom" style='margin-top: 100px;'> 
             <div class="container-fluid ">
                 <div class="text-center row">
                     <div class="col-md-4 links">

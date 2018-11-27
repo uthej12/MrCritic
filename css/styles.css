@@ -278,6 +278,10 @@ body
     display: inline;
 
 }
+.clicked{
+    background-color: #fff !important;
+    color: black !important;
+}
 .actions {
     background-color: transparent; 
     color: white; 
